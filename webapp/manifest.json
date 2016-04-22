@@ -1,0 +1,95 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "<component ID>",
+		"type": "component",
+		"i18n": "resources/i18n/texts.properties",
+		"title": "{{<key in .properties file>}}",
+		"description": "{{<key in .properties file>}}",
+		"applicationVersion": {
+			"version": "${project.version}"
+		},
+		"ach": "<ach>",
+		"dataSources": {
+			"PathPersistenceServiceRoot": {
+                "uri": "/sap/hba/r/apf/core/odata/apf.xsodata",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            },
+               "SmartBusiness": {
+				"uri": "/sap/hba/r/sb/core/odata/runtime/SMART_BUSINESS.xsodata",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+		      "LogicalSystem": {
+				"uri": "/sap/hba/apps/wca/dso/s/odata/wca.xsodata",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		},
+			"AnalyticalConfigurationLocation" : {
+                "uri": "./config/analyticalConfiguration.json",
+                "type": "JSON"
+            }, 
+
+		"resources" : "resources.json",
+		"offline": false
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": false
+		},
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
+	},
+
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {
+					"minVersion": "1.30.0"
+				},
+				"sap.ca.ui": {
+					"minVersion": "1.30.0"
+				},
+				"sap.m": {
+					"minVersion": "1.30.0"
+				},
+				"sap.ui.layout": {
+					"minVersion": "1.30.0"
+				},
+				"sap.ushell": {
+					"minVersion": "1.30.0"
+				},
+				"sap.viz": {
+					"minVersion": "1.30.0"
+				}
+			}
+		},
+		"extends": {
+			"component": "sap.apf.base.Component"
+		},
+		 "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "resources/i18n/texts.properties"
+			}
+		}
+	}
+}
