@@ -46,7 +46,9 @@
 		"routing":{
 			"config":{
 				"routerClass": "sap.m.routing.Router",
-				"viewType": "XML"
+				"viewType": "XML",
+				"viewPath": "nl.newitera.markdevlieger.contactlist.view",
+				"controlId": "app"
 			},
 			"routes":[],
 			"targets":{}

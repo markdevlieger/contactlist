@@ -17,9 +17,9 @@ sap.ui.define([
 			this.getRouter().initialize();
 
 			//Set a model
-			// var oModel = new JSONModel();
-			// oModel.loadData("model/mock.json", {}, false);
-			// this.setModel(oModel);
+			var oModel = new JSONModel();
+			oModel.loadData("model/mock.json", {}, false);
+			this.setModel(oModel);
 
 		}
 	});
