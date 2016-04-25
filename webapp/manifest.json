@@ -50,8 +50,29 @@
 				"viewPath": "nl.newitera.markdevlieger.contactlist.view",
 				"controlId": "app"
 			},
-			"routes":[],
-			"targets":{}
+			"routes":[{
+				"pattern":"",
+				"name":"home",
+				"target":["master", "emptyView"]
+			},{
+				"pattern":"contact/{contactId}",
+				"name": "contactdetail",
+				"target": ["master", "detail"]
+				}],
+			"targets":{
+				"master":{
+					"viewName": "Master",
+					"controlAggregation": "masterPages"
+				},
+				"emptyView":{
+					"viewName": "EmptyView",
+					"controlAggregation": "detailPages"
+				},
+				"detail":{
+					"viewName": "Detail",
+					"controlAggregation": "detailPages"
+				}
+			}
 		}
 	}
 }
