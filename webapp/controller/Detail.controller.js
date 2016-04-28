@@ -35,11 +35,11 @@ sap.ui.define([
 
 		_onRouteMatched: function(oEvent){
 			var oArgs = oEvent.getParameter("arguments");
-			var oView = this.getView();
 
-			oView.bindElement({
-				path: "/Contacts/" + oArgs.contactId
-			});
+			var oModel = new JSONModel();
+			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
+			this.getOwnerComponent().setModel(oModel, "Detail");
+
 			this._setDisplayMode();
 		},
 

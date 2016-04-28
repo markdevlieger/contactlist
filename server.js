@@ -1,6 +1,6 @@
 var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
-//var contactlistDb = require('./service/contactlistDb.js');
+var contactlistDb = require('./service/contactlistDb.js');
 
 var app = express( );
 var db;
@@ -15,7 +15,8 @@ MongoClient.connect("mongodb://localhost:27017/contactlist", (err, database) => 
 	});
 
 	app.use(express.static(__dirname + '/webapp'));
-	// app.use("/service/contactlistDb", contactlistDb);
+	app.use("/service/contactlistDb", contactlistDb);
+	
 	app.listen(4000, ()=>{
 		console.log("Listening on port 4000");
 	})

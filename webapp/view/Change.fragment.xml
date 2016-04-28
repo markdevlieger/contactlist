@@ -7,7 +7,7 @@
 			title="{i18n>DetailFormTitle}">
 			<f:content>
 				<Label text="{i18n>DetailNameLabel}" />
-				<Input value="{firstName}" /> <Input value="{lastName}" />
+				<Input value="{Detail>/firstName}" /> <Input value="{lastName}" />
 				<Label text="{i18n>DetailStreetLabel}" />
 				<Input value="{address/street}" /> <Input value="{address/houseNumber}" />
 				<Label text="{i18n>DetailPostalCodeLabel}" />
