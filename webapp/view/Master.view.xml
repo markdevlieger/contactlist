@@ -1,11 +1,13 @@
 <mvc:View
-	controller="nl.newitera.markdevlieger.contactlist.controller.Master"
+	controllerName="nl.newitera.markdevlieger.contactlist.controller.Master"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc">
 	<List
 		id="ContactList"
 		items="{/Contacts}">
 		<StandardListItem
-			title="{firstName} {lastName}"/>
+			title="{firstName} {lastName}"
+			type="Navigation"
+			press="onListItemPressed"/>
 	</List>
 </mvc:View>

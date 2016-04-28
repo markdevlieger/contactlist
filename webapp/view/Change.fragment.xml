@@ -1,0 +1,20 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+	<VBox class="sapUiSmallMargin" >
+		<f:SimpleForm
+			title="{i18n>DetailFormTitle}">
+			<f:content>
+				<Label text="{i18n>DetailNameLabel}" />
+				<Input value="{firstName}" /> <Input value="{lastName}" />
+				<Label text="{i18n>DetailStreetLabel}" />
+				<Input value="{address/street}" /> <Input value="{address/houseNumber}" />
+				<Label text="{i18n>DetailPostalCodeLabel}" />
+				<Input value="{address/postalCode}" />
+				<Label text="{i18n>DetailCityLabel}" />
+				<Input value="{address/city}" />
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</core:FragmentDefinition>
