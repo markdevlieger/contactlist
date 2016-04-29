@@ -1,8 +1,8 @@
 # contactlist
 ### Prerequisites:
--. Node.js installed
--. Create directory /webapp/resources for OpenUI5 resources
--. Open a commandline in root directory of this app and run
+- Node.js installed
+- Create directory /webapp/resources for OpenUI5 resources
+- Open a commandline in root directory of this app and run
 ```
 npm install
 ```
