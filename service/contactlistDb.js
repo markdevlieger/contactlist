@@ -6,21 +6,14 @@ var router = express.Router();
  */
 router.get('/contactlist', (req, res) => {
 	var db = req.db;
-	var cursor = db.collection('contactlist').find({},{firstName:1, lastName:1}).sort({"lastName":1});
-	var result = [];
-	cursor.each((err, doc)=>{
-		if (err) {
+	var cursor = db.collection('contactlist').find({},{firstName:1, lastName:1}).sort({"lastName":1}).toArray((err, result)=>{
+		if (err){
 			console.log(err);
 			return res.end();
 		}
-		if (doc !== null){
-			result.push(doc);
-		} else {
-			res.write(JSON.stringify({"Contacts":result}));
-			res.end();
-		}
+		res.write(JSON.stringify({"Contacts":result}));
+		res.end();		
 	});
-	
 });
 
 /*
@@ -31,21 +24,15 @@ router.get('/singleContact', (req, res) =>{
 
 
 	var id = Number.parseInt(req.query.contactId);
-	var cursor = db.collection('contactlist').find({"_id": id});
-	var result = {};
-	cursor.each((err, doc)=>{
+	var cursor = db.collection('contactlist').find({"_id": id}).toArray((err, result)=>{
 		if (err){
 			console.log(err);
 			return res.end();
 		}
-		if (doc!==null){
-			result = doc;
-		} else {
-			res.write(JSON.stringify(result));
-			res.end();
-		}
-	})
+		res.write(JSON.stringify(result[0]));
+		res.end();
 
+	});
 });
 
 /*
@@ -55,6 +42,7 @@ router.post('/saveContact', (req, res) => {
 	var db = req.db;
 	var body = req.body;
 	body._id = Number.parseInt(req.body._id);
+	// If the _id is NaN, a new contact must be created
 	if ( !isNaN(body._id) ){
 		db.collection('contactlist').replaceOne(
 			{ _id : body._id},
@@ -65,6 +53,7 @@ router.post('/saveContact', (req, res) => {
 			} );
 		res.end();
 	} else {
+		// first find the highest _id, and add 1 to create a new _id
 		db.collection('contactlist').find().sort({"_id": -1}).toArray((err, result) => {
 			body._id = result[0]._id + 1;
 			db.collection('contactlist').insertOne(body);

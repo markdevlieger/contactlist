@@ -16,6 +16,7 @@ sap.ui.define([
 		},
 
 		onButtonSave: function(oEvent){
+			// Use the loadData of a JSONModel to do the POST request
 			var oModel = new JSONModel();
 			oModel.loadData(
 				"/service/contactlistDb/saveContact",			//sURL
@@ -23,11 +24,14 @@ sap.ui.define([
 				false,											//bAsync
 				'POST'											//sType
 				);
+			//Reload Master model, in case of an insert/change in Name
 			this.getOwnerComponent().getModel("Master").loadData("/service/contactlistDb/contactlist", {}, false);
+			//Return to display mode
 			this._setDisplayMode();		
 		},
 
 		onButtonCancel: function(oEvent){
+			//Reload contact and return to display mode
 			var oModel = this.getView().getModel("Detail");
 			var aData = oModel.getData();
 			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + aData._id, {}, false);
@@ -48,6 +52,7 @@ sap.ui.define([
 			var oArgs = oEvent.getParameter("arguments");
 
 			var oModel = new JSONModel();
+			// If contactId = "new", a new contact is to be created
 			if ( oArgs.contactId !== "new" ){
 				oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
 				//ensure that subobjects are created
@@ -57,6 +62,7 @@ sap.ui.define([
 					oModel.setJSON(aData);
 				}
 			} else {
+				//ensure subobjects are created, otherwise they will not be saved on change
 				oModel.setData({firstName :"", lastName:"", address: {}});
 			}
 			this.getOwnerComponent().setModel(oModel, "Detail");
