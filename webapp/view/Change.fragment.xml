@@ -7,13 +7,13 @@
 			title="{i18n>DetailFormTitle}">
 			<f:content>
 				<Label text="{i18n>DetailNameLabel}" />
-				<Input value="{Detail>/firstName}" /> <Input value="{lastName}" />
+				<Input value="{Detail>/firstName}" /> <Input value="{Detail>/lastName}" />
 				<Label text="{i18n>DetailStreetLabel}" />
-				<Input value="{address/street}" /> <Input value="{address/houseNumber}" />
+				<Input value="{Detail>/address/street}" /> <Input value="{Detail>/address/houseNumber}" />
 				<Label text="{i18n>DetailPostalCodeLabel}" />
-				<Input value="{address/postalCode}" />
+				<Input value="{Detail>/address/postalCode}" />
 				<Label text="{i18n>DetailCityLabel}" />
-				<Input value="{address/city}" />
+				<Input value="{Detail>/address/city}" />
 			</f:content>
 		</f:SimpleForm>
 	</VBox>

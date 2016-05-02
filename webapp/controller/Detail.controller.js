@@ -16,10 +16,19 @@ sap.ui.define([
 		},
 
 		onButtonSave: function(oEvent){
+			var oModel = new JSONModel();
+			oModel.loadData(
+				"/service/contactlistDb/saveContact",			//sURL
+				this.getView().getModel("Detail").getData(),	//oParameters
+				false,											//bAsync
+				'POST'											//sType
+				);
 			this._setDisplayMode();		
 		},
 
 		onButtonCancel: function(oEvent){
+			var oModel = this.getView().getModel("Detail");
+			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
 			this._setDisplayMode();
 		},
 

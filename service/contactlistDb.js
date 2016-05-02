@@ -40,9 +40,7 @@ router.get('/singleContact', (req, res) =>{
 		}
 		if (doc!==null){
 			result = doc;
-			console.log(doc);
 		} else {
-			console.log(result);
 			res.write(JSON.stringify(result));
 			res.end();
 		}
@@ -50,4 +48,18 @@ router.get('/singleContact', (req, res) =>{
 
 });
 
+router.post('/saveContact', (req, res) => {
+	var db = req.db;
+	console.log(req.body);
+	var body = req.body;
+	body._id = Number.parseInt(req.body._id);
+	db.collection('contactlist').replaceOne(
+		{ _id : body._id},
+		req.body,
+		(err, results)=>{
+			if (err) console.log(err);
+			res.end();
+		} );
+	res.end();
+});
 module.exports = router;

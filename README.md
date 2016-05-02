@@ -17,11 +17,11 @@ mongod --dbpath "<path to your database>"
 mongo
 ```
 - In the mongo shell perform the following steps
-  - Change to database contactlist
+- Change to database contactlist
 ```
 use contactlist
 ```
-  - load the mockdata in the collection contactlist:
+- Load the mockdata in the collection contactlist:
 ```
 db.contactlist.insert([ 
   { 
