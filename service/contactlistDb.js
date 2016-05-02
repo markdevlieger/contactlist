@@ -48,18 +48,28 @@ router.get('/singleContact', (req, res) =>{
 
 });
 
+/*
+ * Update or insert single contact
+ */
 router.post('/saveContact', (req, res) => {
 	var db = req.db;
-	console.log(req.body);
 	var body = req.body;
 	body._id = Number.parseInt(req.body._id);
-	db.collection('contactlist').replaceOne(
-		{ _id : body._id},
-		req.body,
-		(err, results)=>{
-			if (err) console.log(err);
-			res.end();
-		} );
-	res.end();
+	if ( !isNaN(body._id) ){
+		db.collection('contactlist').replaceOne(
+			{ _id : body._id},
+			req.body,
+			(err, results)=>{
+				if (err) console.log(err);
+				res.end();
+			} );
+		res.end();
+	} else {
+		db.collection('contactlist').find().sort({"_id": -1}).toArray((err, result) => {
+			body._id = result[0]._id + 1;
+			db.collection('contactlist').insertOne(body);
+		});
+		res.end();
+	}
 });
 module.exports = router;

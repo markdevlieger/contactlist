@@ -23,12 +23,14 @@ sap.ui.define([
 				false,											//bAsync
 				'POST'											//sType
 				);
+			this.getOwnerComponent().getModel("Master").loadData("/service/contactlistDb/contactlist", {}, false);
 			this._setDisplayMode();		
 		},
 
 		onButtonCancel: function(oEvent){
 			var oModel = this.getView().getModel("Detail");
-			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
+			var aData = oModel.getData();
+			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + aData._id, {}, false);
 			this._setDisplayMode();
 		},
 
@@ -46,10 +48,24 @@ sap.ui.define([
 			var oArgs = oEvent.getParameter("arguments");
 
 			var oModel = new JSONModel();
-			oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
+			if ( oArgs.contactId !== "new" ){
+				oModel.loadData("/service/contactlistDb/singleContact?contactId=" + oArgs.contactId, {}, false);
+				//ensure that subobjects are created
+				var aData = oModel.getData();
+				if (!aData.address){
+					aData.address = {};
+					oModel.setJSON(aData);
+				}
+			} else {
+				oModel.setData({firstName :"", lastName:"", address: {}});
+			}
 			this.getOwnerComponent().setModel(oModel, "Detail");
 
-			this._setDisplayMode();
+			if ( oArgs.contactId !== "new"){
+				this._setDisplayMode();
+			} else {
+				this._setChangeMode();
+			}
 		},
 
 		_createButtonModel: function(){
