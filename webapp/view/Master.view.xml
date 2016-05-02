@@ -4,9 +4,9 @@
 	xmlns:mvc="sap.ui.core.mvc">
 	<List
 		id="ContactList"
-		items="{/Contacts}">
+		items="{Master>/Contacts}">
 		<StandardListItem
-			title="{firstName} {lastName}"
+			title="{Master>firstName} {Master>lastName}"
 			type="Navigation"
 			press="onListItemPressed"/>
 	</List>

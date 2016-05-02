@@ -7,13 +7,13 @@
 			title="{i18n>DetailFormTitle}">
 			<f:content>
 				<Label text="{i18n>DetailNameLabel}" />
-				<Text text="{firstName} {lastName}" />
+				<Text text="{Detail>/firstName} {Detail>/lastName}" />
 				<Label text="{i18n>DetailStreetLabel}" />
-				<Text text="{address/street} {address/houseNumber}" />
+				<Text text="{Detail>/address/street} {Detail>/address/houseNumber}" />
 				<Label text="{i18n>DetailPostalCodeLabel}" />
-				<Text text="{address/postalCode}" />
+				<Text text="{Detail>/address/postalCode}" />
 				<Label text="{i18n>DetailCityLabel}" />
-				<Text text="{address/city}" />
+				<Text text="{Detail>/address/city}" />
 			</f:content>
 		</f:SimpleForm>
 	</VBox>
