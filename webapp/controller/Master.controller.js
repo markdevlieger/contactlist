@@ -8,7 +8,7 @@ sap.ui.define([
 			//Set model
 			var oModel = new JSONModel();
 			oModel.loadData("/service/contactlistDb/contactlist", {}, false);
-			this.getView().setModel(oModel, "Master");
+			this.getOwnerComponent().setModel(oModel, "Master");
 		},
 
 		onListItemPressed: function(oEvent){
@@ -16,6 +16,13 @@ sap.ui.define([
 			var oCtx  = oItem.getBindingContext("Master");
 			this.getRouter().navTo( "contactdetail",{
 				contactId : oCtx.getProperty("_id")
+			});
+		},
+
+		onButtonAdd: function(oEvent){
+
+			this.getRouter().navTo("contactdetail", {
+				contactId: "new"
 			});
 		}
 	});
