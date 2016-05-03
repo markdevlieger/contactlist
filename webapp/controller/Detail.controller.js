@@ -38,6 +38,21 @@ sap.ui.define([
 			this._setDisplayMode();
 		},
 
+		onButtonDelete: function(oEvent){
+			//Use the loadData of a JSONModel to do the POST request
+			var oModel = new JSONModel();
+			oModel.loadData(
+				"/service/contactlistDb/deleteContact",			//sURL
+				this.getView().getModel("Detail").getData(),	//oParameters
+				false,											//bAsync
+				'POST'											//sType
+				);
+			//Reload Master model, in case of an insert/change in Name
+			this.getOwnerComponent().getModel("Master").loadData("/service/contactlistDb/contactlist", {}, false);
+			//Navigate to home route
+			this.getRouter().navTo("home");
+		},
+
 		_setDisplayMode: function(){
 			this._setButtonModel("Display");
 			this._setFragment("Display");

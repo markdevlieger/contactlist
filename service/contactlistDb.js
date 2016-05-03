@@ -61,4 +61,19 @@ router.post('/saveContact', (req, res) => {
 		res.end();
 	}
 });
+
+/*
+ * Delete single object
+ */
+router.post('/deleteContact', (req, res)=>{
+	var db = req.db;
+	var body = req.body;
+	body._id = Number.parseInt(req.body._id);
+	// If _id is NaN, contact doesn't exist yet, so no deletion is necessary
+	if (!isNaN(body._id)){
+		db.collection('contactlist').remove({_id: body._id}, 1);
+	}
+	res.end();
+});
+
 module.exports = router;
